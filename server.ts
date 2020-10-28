@@ -8,8 +8,18 @@ const app = new Application();
 const router = new Router();
 
 router
+  .post('/signin', async (ctx) => {
+    const { user, password } = await ctx.request.body({
+      type: 'json'
+    }).value;
+    console.log({ user, password });
+    ctx.response.body = {
+      status: 'SUCCESS',
+    };
+  })
   .get('/articles', async (ctx) => {
     const articles = await readFileTransformer('./assets/data/articles.json');
+    console.log(articles);
     ctx.response.body = {
       status: 'SUCCESS',
       articles
@@ -21,8 +31,12 @@ router
     const newValue = await ctx.request.body({
       type: 'json'
     }).value;
+    console.log({
+      id: id.toString(),
+      ...newValue
+    });
     articles.push({
-      id,
+      id: id.toString(),
       ...newValue
     });
     await writeFileTransformer('./assets/data/articles.json', articles);
@@ -34,6 +48,7 @@ router
     const { id } = ctx.params;
     const articles = await readFileTransformer('./assets/data/articles.json');
     const article = articles.find((item: any) => item.id === id);
+    console.log(article);
     ctx.response.body = {
       status: 'SUCCESS',
       article: article ?? null
@@ -54,6 +69,7 @@ router
       }
       return article;
     });
+    console.log(newArticles);
     await writeFileTransformer('./assets/data/articles.json', newArticles);
     ctx.response.body = {
       status: 'SUCCESS',

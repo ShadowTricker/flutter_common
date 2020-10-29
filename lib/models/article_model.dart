@@ -13,9 +13,9 @@ class ArticleModel {
         content = json['content'] as String;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'id': id,
-        'title': title,
-        'author': author,
-        'content': content
-      };
+    'id': id,
+    'title': title,
+    'author': author,
+    'content': content
+  };
 }

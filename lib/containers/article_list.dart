@@ -47,7 +47,7 @@ class _ArticleListState extends State<ArticleList> {
           child: ArticleItem(),
           onTap: () {
             print(index);
-            Navigator.of(context).pushNamed('/article');
+            Navigator.of(context).pushNamed('/favors');
           }
         );
       },

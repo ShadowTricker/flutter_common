@@ -12,21 +12,21 @@ class ArticleFooter extends StatelessWidget {
           onPressed: () {},
           onLongPress: null,
           label: '1',
-          color: MyFontColors.black_99
+          color: MyColors.black_99
           // color: Theme.of(context).primaryColor
         ),
         _buildIconButton(
           Icons.monetization_on,
           onPressed: () {},
           label: '2',
-          color: MyFontColors.black_99
+          color: MyColors.black_99
           // color: Theme.of(context).primaryColor
         ),
         _buildIconButton(
           Icons.bookmark,
           onPressed: () {},
           label: '3',
-          color: MyFontColors.black_99
+          color: MyColors.black_99
           // color: Theme.of(context).primaryColor
         )
       ],

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class MyFontColors {
+class MyColors {
 
   static const black_33 = Color(0xff333333);
 
@@ -15,4 +15,7 @@ class MyFontColors {
 
   static const black_cf = Color(0xffcfcfcf);
 
+  static const black_f2 = Color(0xfff2f2f2);
+
 }
+

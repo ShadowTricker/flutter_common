@@ -10,12 +10,12 @@ class ArticleHeader extends StatelessWidget {
           Text('岳阳楼记', style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
-            color: MyFontColors.black_33
+            color: MyColors.black_33
           )),
           Spacer(),
           Text('范仲淹', style: TextStyle(
             fontSize: 14,
-            color: MyFontColors.black_33
+            color: MyColors.black_33
           ))
         ]
       ),

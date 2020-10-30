@@ -22,7 +22,7 @@ class PublishPage extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Logo();
+    return Logo(size: 120.0);
     // return Text(isEdit.toString());
   }
 

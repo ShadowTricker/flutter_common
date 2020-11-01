@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_common/components/logo/logo.dart';
 import 'package:flutter_common/components/shadow_button/shadow_button.dart';
+import 'package:flutter_common/components/sign_in_state/sign_in_state.dart';
 import 'package:flutter_common/constants/my_colors.dart';
+import 'package:flutter_common/services/http_service.dart';
 
 class SignIn extends StatelessWidget {
+
+  final HttpService http = new HttpService();
 
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -22,6 +26,30 @@ class SignIn extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
+    /* return Scrollbar(
+      child: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white
+          ),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Logo(size: 140.0),
+                _username(),
+                _password(),
+                // _signinButton(),
+                _mySigninButton()
+              ],
+            ),
+          )
+        ),
+      )
+    ); */
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -36,7 +64,7 @@ class SignIn extends StatelessWidget {
             _username(),
             _password(),
             // _signinButton(),
-            _mySigninButton()
+            _mySigninButton(context)
           ],
         ),
       )
@@ -98,7 +126,9 @@ class SignIn extends StatelessWidget {
     );
   }
 
-  Widget _mySigninButton() {
+  Widget _mySigninButton(BuildContext context) {
+    final int routeArg = ModalRoute.of(context).settings.arguments;
+
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: ShadowButton(
@@ -110,8 +140,24 @@ class SignIn extends StatelessWidget {
         ),
         padding: EdgeInsets.symmetric(horizontal: 120, vertical: 12.0),
         borderRadius: BorderRadius.circular(60.0),
-        onPressed: () {
-          print('Sign In');
+        onPressed: () async {
+          print({
+            'username': _userNameController.text,
+            'passowrd': _passwordController.text,
+          });
+          final isSuccess = await http.signin(
+            user: _userNameController.text,
+            password: _passwordController.text
+          );
+          if (isSuccess) {
+            SignInStateWidget
+              .of(context)
+              .setSignInUser(_userNameController.text);
+            routeArg < 0
+              ? Navigator.of(context).popAndPushNamed('/publish')
+              : Navigator.of(context)
+                  .popAndPushNamed('/article', arguments: routeArg);
+          }
         },
       )
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_common/constants/my_colors.dart';
 
 class Logo extends StatelessWidget {
 
@@ -15,7 +16,7 @@ class Logo extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         shape: shape,
-        color: Color(0xfff2f2f2),
+        color: MyColors.black_f2,
         boxShadow: [
           BoxShadow(
             color:Colors.black12,

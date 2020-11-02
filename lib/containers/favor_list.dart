@@ -28,7 +28,6 @@ class _FavorListState extends State<FavorList> {
         return GestureDetector(
           child: FavorItem(),
           onTap: () {
-            print(index);
             Navigator.of(context).pushNamed('/article');
           }
         );

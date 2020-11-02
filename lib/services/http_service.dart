@@ -4,7 +4,7 @@ import 'package:flutter_common/models/article_model.dart';
 
 class HttpService {
   Dio _dio = new Dio();
-  static String _ip = '10.237.188.40';
+  static String _ip = '10.237.188.46';
   static String _port = '3400';
   String _address = 'http://$_ip:$_port';
 
@@ -17,7 +17,7 @@ class HttpService {
   Future<bool> signin({String user, String password}) async {
     final response = await _dio
         .post('$_address/signin', data: {'user': user, 'password': password});
-    final data = jsonDecode(response.data);
+    final data = response.data;
     if (data['status'] == 'SUCCESS') {
       return true;
     } else {
@@ -27,7 +27,7 @@ class HttpService {
 
   Future<List<ArticleModel>> getArticles() async {
     final response = await _dio.get('$_address/articles');
-    final data = jsonDecode(response.data);
+    final data = response.data;
     if (data['status'] == 'SUCCESS') {
       return data['articles']
           .map<ArticleModel>((data) => ArticleModel.fromJson(data))

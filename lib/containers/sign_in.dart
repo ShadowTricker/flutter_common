@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_common/components/logo/logo.dart';
 import 'package:flutter_common/components/shadow_button/shadow_button.dart';
-import 'package:flutter_common/components/sign_in_state/sign_in_state.dart';
+import 'package:flutter_common/data_model/signin_state_model.dart';
 import 'package:flutter_common/constants/my_colors.dart';
 import 'package:flutter_common/services/http_service.dart';
 
@@ -127,7 +127,7 @@ class SignIn extends StatelessWidget {
   }
 
   Widget _mySigninButton(BuildContext context) {
-    final int routeArg = ModalRoute.of(context).settings.arguments;
+    final String curId = ModalRoute.of(context).settings.arguments;
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.0),
@@ -145,6 +145,7 @@ class SignIn extends StatelessWidget {
             'username': _userNameController.text,
             'passowrd': _passwordController.text,
           });
+
           final isSuccess = await http.signin(
             user: _userNameController.text,
             password: _passwordController.text
@@ -153,10 +154,14 @@ class SignIn extends StatelessWidget {
             SignInStateWidget
               .of(context)
               .setSignInUser(_userNameController.text);
-            routeArg < 0
+            if (curId == null) {
+              Navigator.of(context).pushReplacementNamed('/articles');
+              return;
+            }
+            curId == '-1'
               ? Navigator.of(context).popAndPushNamed('/publish')
               : Navigator.of(context)
-                  .popAndPushNamed('/article', arguments: routeArg);
+                  .popAndPushNamed('/article', arguments: curId);
           }
         },
       )

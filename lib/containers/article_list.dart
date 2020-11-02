@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_common/components/articles/article_item.dart';
-import 'package:flutter_common/components/drawer/drawer.dart';
-import 'package:flutter_common/components/sign_in_state/sign_in_state.dart';
+import 'package:flutter_common/containers/drawer.dart';
+import 'package:flutter_common/data_model/articles_state_model.dart';
+import 'package:flutter_common/data_model/signin_state_model.dart';
 import 'package:flutter_common/constants/my_colors.dart';
+import 'package:flutter_common/models/article_model.dart';
+import 'package:flutter_common/services/http_service.dart';
 
 class ArticleList extends StatefulWidget {
 
@@ -14,11 +17,19 @@ class ArticleList extends StatefulWidget {
 class _ArticleListState extends State<ArticleList> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  HttpService http = HttpService();
 
   bool showDialog = false;
-  // curIndex = -1 to publish
-  // curIndex > 0 to article
-  int curIndex = -1;
+  // curId = -1 to publish
+  // curId > 0 to article
+  String curId = '-1';
+
+  @override
+  void initState() {
+    super.initState();
+    http.getArticles().then((value)
+      => ArticleStateWidget.of(context).updateArticles(value));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +53,7 @@ class _ArticleListState extends State<ArticleList> {
           } else {
             setState(() {
               showDialog = true;
-              curIndex = -1;
+              curId = '-1';
             });
           }
         },
@@ -104,19 +115,21 @@ class _ArticleListState extends State<ArticleList> {
   }
 
   ListView _buildList(BuildContext context) {
+    final List<ArticleModel> articles = ArticleStateWidget.of(context).articles;
     return ListView.separated(
-      itemCount: 10,
+      itemCount: articles.length,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
-          child: ArticleItem(),
+          child: ArticleItem(article: articles[index]),
           onTap: () {
             final String userName = _getUserName(context);
             if (userName.length > 0) {
-              Navigator.of(context).pushNamed('/article', arguments: index);
+              Navigator.of(context)
+                .pushNamed('/article', arguments: articles[index].id);
             } else {
               setState(() {
                 showDialog = true;
-                curIndex = index;
+                curId = articles[index].id;
               });
             }
           }
@@ -157,12 +170,13 @@ class _ArticleListState extends State<ArticleList> {
                     ),
                   ),
                   onPressed: () {
-                    int index = curIndex;
+                    String id = curId;
                     setState(() {
-                      curIndex = -1;
+                      showDialog = false;
+                      curId = '-1';
                     });
                     Navigator.of(context)
-                      .pushNamed('/sign-in', arguments: index);
+                      .pushNamed('/sign-in', arguments: id);
                   },
                 )
               ],

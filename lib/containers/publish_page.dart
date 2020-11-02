@@ -126,7 +126,7 @@ class PublishPage extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) {
           return ShadowButton(
-            text: 'SIGN IN',
+            text: 'PUBLISH',
             textStyle: TextStyle(
               color: Colors.white,
               fontSize: 20.0,

@@ -7,7 +7,9 @@ import 'package:flutter_common/containers/sign_in.dart';
 
 Map<String, WidgetBuilder> routes = {
   '/articles': (context) => ArticleList(),
-  '/article': (context) => ArticlePage(),
+  '/article': (context) => ArticlePage(
+    articleId: ModalRoute.of(context).settings.arguments
+  ),
   '/favors': (context) => FavorList(),
   '/publish': (context) {
     final bool isEdit = ModalRoute.of(context).settings.arguments;

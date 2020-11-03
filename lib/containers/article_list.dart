@@ -37,6 +37,7 @@ class _ArticleListState extends State<ArticleList> {
   Widget build(BuildContext context) {
     final Color themeColor = Theme.of(context).primaryColor;
     final String userName = SignInStateWidget.of(context).signInUser;
+    return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text('Articles', style: TextStyle(color: Colors.white)),

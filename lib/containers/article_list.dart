@@ -7,6 +7,8 @@ import 'package:flutter_common/constants/my_colors.dart';
 import 'package:flutter_common/models/article_model.dart';
 import 'package:flutter_common/services/http_service.dart';
 
+import '../data_model/signin_state_model.dart';
+
 class ArticleList extends StatefulWidget {
 
   @override
@@ -34,14 +36,14 @@ class _ArticleListState extends State<ArticleList> {
   @override
   Widget build(BuildContext context) {
     final Color themeColor = Theme.of(context).primaryColor;
-    return Scaffold(
+    final String userName = SignInStateWidget.of(context).signInUser;
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text('Articles', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         leading: Builder(builder: (context) => Text('')),
       ),
-      drawer: DrawerWidget(logout: () {}, userName: 'Shadow'),
+      drawer: DrawerWidget(logout: () {}, userName: userName),
       body: _buildbody(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

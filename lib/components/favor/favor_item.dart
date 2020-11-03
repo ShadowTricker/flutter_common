@@ -6,7 +6,10 @@ class FavorItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       child: Column(
-        children: [ArticleHeader(), _buildContent(context)],
+        children: [
+          ArticleHeader(title: '岳阳楼记', author: '范仲淹'),
+          _buildContent(context)
+        ],
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
       ),

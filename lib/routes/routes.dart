@@ -12,8 +12,8 @@ Map<String, WidgetBuilder> routes = {
   ),
   '/favors': (context) => FavorList(),
   '/publish': (context) {
-    final bool isEdit = ModalRoute.of(context).settings.arguments;
-    return PublishPage(isEdit: isEdit ?? false);
+    final String id = ModalRoute.of(context).settings.arguments;
+    return PublishPage(id: id);
   },
   '/sign-in': (context) => SignIn()
 };

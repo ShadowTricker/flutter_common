@@ -23,7 +23,7 @@ class ArticlePage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.edit),
             onPressed: () {
-              Navigator.of(context).pushNamed('/publish', arguments: true);
+              Navigator.of(context).pushNamed('/publish', arguments: articleId);
             }
           )
         ],

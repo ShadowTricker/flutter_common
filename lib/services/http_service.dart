@@ -4,7 +4,7 @@ import 'package:flutter_common/models/article_model.dart';
 
 class HttpService {
   Dio _dio = new Dio();
-  static String _ip = '10.237.188.46';
+  static String _ip = '192.168.0.107';
   static String _port = '3400';
   String _address = 'http://$_ip:$_port';
 
@@ -42,7 +42,7 @@ class HttpService {
   Future<bool> postArticles({ArticleModel article}) async {
     final response =
         await _dio.post('$_address/articles', data: article.toJson());
-    final data = jsonDecode(response.data);
+    final data = response.data;
     if (data['status'] == 'SUCCESS') {
       return true;
     } else {
@@ -52,7 +52,7 @@ class HttpService {
 
   Future<ArticleModel> getArticle({String id}) async {
     final response = await _dio.get('$_address/articles/$id');
-    final data = jsonDecode(response.data);
+    final data = response.data;
     if (data['status'] == 'SUCCESS') {
       return ArticleModel.fromJson(data['articles']);
     } else {
@@ -63,7 +63,7 @@ class HttpService {
   Future<bool> updateArticle({String id, ArticleModel article}) async {
     final response =
         await _dio.put('$_address/articles/$id', data: article.toJson());
-    final data = jsonDecode(response.data);
+    final data = response.data;
     if (data['status'] == 'SUCCESS') {
       return true;
     } else {

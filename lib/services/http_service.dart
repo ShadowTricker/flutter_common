@@ -4,7 +4,7 @@ import 'package:flutter_common/models/article_model.dart';
 
 class HttpService {
   Dio _dio = new Dio();
-  static String _ip = '192.168.0.107';
+  static String _ip = '192.168.0.100';
   static String _port = '3400';
   String _address = 'http://$_ip:$_port';
 

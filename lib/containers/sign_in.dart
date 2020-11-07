@@ -26,29 +26,20 @@ class SignIn extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    /* return Scrollbar(
+    return Center(
       child: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white
-          ),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Logo(size: 140.0),
-                _username(),
-                _password(),
-                // _signinButton(),
-                _mySigninButton()
-              ],
-            ),
-          )
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Logo(size: 140.0),
+            _username(),
+            _password(),
+            // _signinButton(),
+            _mySigninButton(context)
+          ]
         ),
       )
-    ); */
+    );
 
     return Container(
       width: double.infinity,

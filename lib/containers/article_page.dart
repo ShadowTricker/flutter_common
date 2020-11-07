@@ -35,42 +35,44 @@ class ArticlePage extends StatelessWidget {
   Widget _buildBody(ArticleModel article) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 12.0, bottom: 4.0),
-            child: Text(
-              article.title,
-              style: TextStyle(
-                fontSize: 20.0,
-                color: MyColors.black_33,
-                fontWeight: FontWeight.bold
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 12.0, bottom: 4.0),
+              child: Text(
+                article.title,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: MyColors.black_33,
+                  fontWeight: FontWeight.bold
+                )
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 6.0),
+              child: Text(
+                article.author,
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: MyColors.black_a8
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 6.0),
+              child: Text(
+                article.content,
+                style: TextStyle(
+                  color: MyColors.black_66,
+                  fontSize: 14.0
+                ),
               )
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 6.0),
-            child: Text(
-              article.author,
-              style: TextStyle(
-                fontSize: 16.0,
-                color: MyColors.black_a8
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 6.0),
-            child: Text(
-              article.content,
-              style: TextStyle(
-                color: MyColors.black_66,
-                fontSize: 14.0
-              ),
             )
-          )
-        ],
-      ),
+          ],
+        )
+      )
     );
   }
 

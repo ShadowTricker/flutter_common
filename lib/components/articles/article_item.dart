@@ -7,8 +7,9 @@ import 'article_header.dart';
 class ArticleItem extends StatelessWidget {
 
   final ArticleModel article;
+  final Function updateFavorId;
 
-  ArticleItem({ @required this.article });
+  ArticleItem({ @required this.article, this.updateFavorId });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ArticleItem extends StatelessWidget {
         children: [
           ArticleHeader(title: article.title, author: article.author),
           _buildContent(context),
-          ArticleFooter()
+          ArticleFooter(articleId: article.id, updateFavorIds: updateFavorId)
         ],
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,

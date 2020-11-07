@@ -3,6 +3,14 @@ import 'package:flutter_common/constants/my_colors.dart';
 
 class ArticleFooter extends StatefulWidget {
 
+  final String articleId;
+  final Function updateFavorIds;
+
+  ArticleFooter({
+    @required this.articleId,
+    @required this.updateFavorIds
+  });
+
   @override
   _ArticleFooterState createState() => _ArticleFooterState();
 
@@ -25,19 +33,16 @@ class _ArticleFooterState extends State<ArticleFooter> {
           onPressed: toggleThumb,
           onLongPress: turnAllOn,
           color: isThumbed ? themeColor : MyColors.black_99
-          // color: Theme.of(context).primaryColor
         ),
         _buildIconButton(
           Icons.monetization_on,
           onPressed: toggleCoin,
           color: isCoined ? themeColor : MyColors.black_99
-          // color: Theme.of(context).primaryColor
         ),
         _buildIconButton(
           Icons.bookmark,
           onPressed: toggleFavor,
           color: isFavor ? themeColor : MyColors.black_99
-          // color: Theme.of(context).primaryColor
         )
       ],
     );
@@ -48,7 +53,8 @@ class _ArticleFooterState extends State<ArticleFooter> {
     {
       Color color,
       Function onPressed,
-      Function onLongPress
+      Function onLongPress,
+
     }
   ) {
     return InkWell(
@@ -77,6 +83,7 @@ class _ArticleFooterState extends State<ArticleFooter> {
   void toggleFavor() {
     setState(() {
       isFavor = !isFavor;
+      widget.updateFavorIds(widget.articleId);
     });
   }
 
@@ -85,6 +92,7 @@ class _ArticleFooterState extends State<ArticleFooter> {
       isThumbed = true;
       isCoined = true;
       isFavor = true;
+      widget.updateFavorIds(widget.articleId);
     });
   }
 

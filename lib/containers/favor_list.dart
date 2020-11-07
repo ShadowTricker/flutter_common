@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_common/components/favor/favor_item.dart';
+import 'package:flutter_common/data_model/articles_state_model.dart';
+import 'package:flutter_common/data_model/favors_state_model.dart';
+import 'package:flutter_common/models/article_model.dart';
 
 class FavorList extends StatefulWidget {
 
@@ -22,13 +25,30 @@ class _FavorListState extends State<FavorList> {
   }
 
   Widget _buildbody(BuildContext context) {
+    final List<String> favorIds = FavorsStateWidget.of(context).favorIds;
+    final List<ArticleModel> articles = ArticleStateWidget.of(context).articles;
+    /* final favorArticles = articles.where((ArticleModel article) {
+      return article.id == '2';
+    }).toList(); */
+    List<ArticleModel> favorArticles = [];
+    favorIds.forEach((String id) {
+      articles.forEach((article) {
+        if (article.id == id) {
+          favorArticles.add(article);
+        }
+      });
+    });
+    print(favorArticles);
     return ListView.separated(
-      itemCount: 3,
+      itemCount: favorArticles.length,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
-          child: FavorItem(),
+          child: FavorItem(article: favorArticles[index]),
           onTap: () {
-            Navigator.of(context).pushNamed('/article');
+            Navigator.of(context).pushNamed(
+              '/article',
+              arguments: favorArticles[index].id
+            );
           }
         );
       },

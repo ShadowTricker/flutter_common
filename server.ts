@@ -74,14 +74,14 @@ router
     };
   })
   .put('/:type/:id', async (ctx) => {
-    const { type, id } = ctx.params;
+    const { type = '', id } = ctx.params;
     console.log({ type, id });
     const oldArticles = await readFileTransformer('./assets/data/articles.json');
-    const newArticles = oldArticles.map((article: any) => {
+    const newArticles = oldArticles.map((article: Article) => {
       if (article.id === id) {
         return {
           ...article,
-          [type]: article[type] + 1
+          [type]: article[type as keyof Article] as number + 1
         };
       }
       return article;

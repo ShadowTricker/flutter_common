@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_common/components/articles/article_item.dart';
 import 'package:flutter_common/containers/drawer.dart';
 import 'package:flutter_common/data_model/articles_state_model.dart';
+import 'package:flutter_common/data_model/favors_state_model.dart';
 import 'package:flutter_common/data_model/signin_state_model.dart';
 import 'package:flutter_common/constants/my_colors.dart';
 import 'package:flutter_common/models/article_model.dart';
@@ -119,11 +120,15 @@ class _ArticleListState extends State<ArticleList> {
 
   ListView _buildList(BuildContext context) {
     final List<ArticleModel> articles = ArticleStateWidget.of(context).articles;
+    final Function updateFavorId = FavorsStateWidget.of(context).updateFavorId;
     return ListView.separated(
       itemCount: articles.length,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
-          child: ArticleItem(article: articles[index]),
+          child: ArticleItem(
+            article: articles[index],
+            updateFavorId: updateFavorId,
+          ),
           onTap: () {
             final String userName = _getUserName(context);
             if (userName.length > 0) {

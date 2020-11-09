@@ -1,11 +1,44 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 const { readFile, writeFile } = Deno;
 
-const options = { hostname: '192.168.0.100', port: 3400 };
+const options = { hostname: '10.237.188.45', port: 3400 };
 
 
 const app = new Application();
 const router = new Router();
+
+class Article {
+
+  public id = '';
+  public title = '';
+  public author = '';
+  public content = '';
+  public thumbs = 0;
+  public coins = 0;
+  public favors = 0;
+
+  constructor({
+    id = '',
+    title = '',
+    author = '',
+    content = '',
+    thumbs = 0, coins = 0, favors = 0
+  }) {
+    console.log(id);
+    this.id = id;
+    this.title = title;
+    this.author = author;
+    this.content = content;
+    this.thumbs = thumbs;
+    this.coins = coins;
+    this.favors = favors;
+  }
+
+}
+
+enum ActionType {
+  THUMB, COIN, FAVOR
+}
 
 router
   .post('/signin', async (ctx) => {
@@ -31,9 +64,10 @@ router
     const newValue = await ctx.request.body({
       type: 'json'
     }).value;
+    // console.log(newValue);
     const newArticle = new Article({
-      id: id.toString(),
-      ...newValue
+      ...newValue,
+      id: id.toString()
     });
     console.log(newArticle);
     articles.push(newArticle);
@@ -109,35 +143,5 @@ async function writeFileTransformer(path: string, data: any): Promise<void> {
   await writeFile(path, encoder.encode(JSON.stringify(data)));
 }
 
-class Article {
 
-  public id = '';
-  public title = '';
-  public author = '';
-  public content = '';
-  public thumbs = 0;
-  public coins = 0;
-  public favors = 0;
-
-  constructor({
-    id = '',
-    title = '',
-    author = '',
-    content = '',
-    thumbs = 0, coins = 0, favors = 0
-  }) {
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.content = content;
-    this.thumbs = thumbs;
-    this.coins = coins;
-    this.favors = favors;
-  }
-
-}
-
-enum ActionType {
-  THUMB, COIN, FAVOR
-}
 

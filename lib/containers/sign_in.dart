@@ -26,7 +26,7 @@ class SignIn extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Center(
+    /* return Center(
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -39,7 +39,7 @@ class SignIn extends StatelessWidget {
           ]
         ),
       )
-    );
+    ); */
 
     return Container(
       width: double.infinity,
@@ -121,7 +121,7 @@ class SignIn extends StatelessWidget {
     final String curId = ModalRoute.of(context).settings.arguments;
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
+      padding: EdgeInsets.symmetric(vertical: 30.0),
       child: ShadowButton(
         text: 'SIGN IN',
         textStyle: TextStyle(

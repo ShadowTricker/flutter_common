@@ -34,7 +34,7 @@ class DrawerWidget extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 20.0),
             child: Text(
-              'ShadowTricker',
+              userName,
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold

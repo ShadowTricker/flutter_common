@@ -44,6 +44,14 @@ class _ArticleListState extends State<ArticleList> {
         title: Text('Articles', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         leading: Builder(builder: (context) => Text('')),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.insert_comment),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/hello-world');
+            }
+          )
+        ],
       ),
       drawer: DrawerWidget(logout: () {}, userName: userName),
       body: _buildbody(context),

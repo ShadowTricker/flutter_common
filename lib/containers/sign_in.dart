@@ -26,7 +26,7 @@ class SignIn extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    /* return Center(
+    return Center(
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -39,7 +39,7 @@ class SignIn extends StatelessWidget {
           ]
         ),
       )
-    ); */
+    );
 
     return Container(
       width: double.infinity,

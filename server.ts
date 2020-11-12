@@ -1,7 +1,7 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 const { readFile, writeFile } = Deno;
 
-const options = { hostname: '192.168.0.108', port: 3400 };
+const options = { hostname: '10.237.188.45', port: 3400 };
 
 
 const app = new Application();
